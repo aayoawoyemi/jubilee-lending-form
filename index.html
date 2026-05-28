@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jubilee Lending</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #FAF9F6;
+      color: #2D2A26;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .bg-house {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1920&q=80&auto=format") center/cover no-repeat;
+      opacity: 0.08;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+
+
+    .form-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .slide {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 640px;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide.exit-up {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+
+    /* Logo */
+    .logo {
+      width: 140px;
+      height: auto;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+    }
+
+    /* Welcome screen */
+    .welcome-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(45,42,38,0.35);
+      margin-bottom: 1.5rem;
+    }
+
+    .welcome-title {
+      font-size: 3.2rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      color: #2D2A26;
+    }
+
+    .welcome-sub {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: rgba(45,42,38,0.55);
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Question styling */
+    .q-number {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(45,42,38,0.3);
+      margin-bottom: 1rem;
+    }
+
+    .q-text {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .q-hint {
+      font-size: 0.85rem;
+      color: rgba(45,42,38,0.4);
+      margin-bottom: 2rem;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid rgba(45,42,38,0.12);
+      padding: 1rem 0;
+      font-size: 1.4rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      color: #2D2A26;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      border-bottom-color: rgba(45,42,38,0.45);
+    }
+
+    input::placeholder {
+      color: rgba(45,42,38,0.2);
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] { -moz-appearance: textfield; }
+
+    .btn {
+      margin-top: 2.5rem;
+      padding: 1rem 2.8rem;
+      background: rgba(45,42,38,0.06);
+      border: 1px solid rgba(45,42,38,0.12);
+      border-radius: 60px;
+      color: #2D2A26;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .btn:hover {
+      background: rgba(45,42,38,0.1);
+      border-color: rgba(45,42,38,0.25);
+    }
+
+    .btn-primary {
+      background: #2D2A26;
+      color: #FAF9F6;
+      border-color: #2D2A26;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: #3D3A36;
+      border-color: #3D3A36;
+    }
+
+    .nav-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+
+    .btn-back {
+      padding: 1rem 2rem;
+      background: transparent;
+      border: 1px solid rgba(45,42,38,0.1);
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: #2D2A26;
+      transition: width 0.5s ease;
+      z-index: 100;
+    }
+
+    .enter-hint {
+      margin-top: 1.2rem;
+      font-size: 0.72rem;
+      color: rgba(45,42,38,0.22);
+      letter-spacing: 0.05em;
+    }
+
+    .enter-hint kbd {
+      background: rgba(45,42,38,0.06);
+      border: 1px solid rgba(45,42,38,0.1);
+      border-radius: 4px;
+      padding: 0.15em 0.5em;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+    }
+
+    .thank-you .welcome-title {
+      font-size: 2.6rem;
+    }
+
+    .error-msg {
+      color: #c44;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      min-height: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-house"></div>
+
+<div class="progress-bar" id="progress" style="width: 0%"></div>
+
+<div class="form-container">
+
+  <!-- Slide 0: Welcome -->
+  <div class="slide active" id="slide-0">
+    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+      <img src="logo.jpeg" alt="Jubilee Lending" class="logo" style="margin-bottom: 0;"
+           onerror="this.src='https://storage.tally.so/60df52f1-9c09-4331-9f82-3aa5a5ddeacd/WhatsApp-Image-2026-05-27-at-1.28.20-PM.jpeg'" />
+      <img src="mom.jpeg" alt="" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(45,42,38,0.08);" />
+    </div>
+    <h1 class="welcome-title">Welcome to<br>Jubilee Lending.</h1>
+    <p class="welcome-sub">
+      Thank you for taking 2 minutes of your time to fill out this quick form.<br><br>
+      You will be asked to rate each of the following professionals on a scale of 1 to 10.<br>
+      Put 0 if you do not have one. All fields are required.
+    </p>
+    <button class="btn btn-primary" onclick="goNext()">Get started &rarr;</button>
+  </div>
+
+  <!-- Slide 1: Name -->
+  <div class="slide" id="slide-1">
+    <p class="q-number">Question 1 of 5</p>
+    <p class="q-text">Please type your full name</p>
+    <p class="q-hint"></p>
+    <input type="text" id="name" placeholder="Type your name..." />
+    <div class="error-msg" id="err-1"></div>
+    <div class="nav-row">
+      <button class="btn btn-back" onclick="goBack()">&larr;</button>
+      <button class="btn" onclick="goNext()">Next</button>
+    </div>
+    <p class="enter-hint">Press <kbd>Enter &crarr;</kbd></p>
+  </div>
+
+  <!-- Slide 2: Financial Advisor -->
+  <div class="slide" id="slide-2">
+    <p class="q-number">Question 2 of 5</p>
+    <p class="q-text">Rate your Financial Advisor</p>
+    <p class="q-hint">0 = don't have one &middot; 1&ndash;6 = somewhat recommend &middot; 8&ndash;10 = highly recommend</p>
+    <input type="number" id="financial_advisor" placeholder="0 &ndash; 10" min="0" max="10" />
+    <div class="error-msg" id="err-2"></div>
+    <div class="nav-row">
+      <button class="btn btn-back" onclick="goBack()">&larr;</button>
+      <button class="btn" onclick="goNext()">Next</button>
+    </div>
+    <p class="enter-hint">Press <kbd>Enter &crarr;</kbd></p>
+  </div>
+
+  <!-- Slide 3: CPA -->
+  <div class="slide" id="slide-3">
+    <p class="q-number">Question 3 of 5</p>
+    <p class="q-text">Rate your CPA / Tax Strategist</p>
+    <p class="q-hint">0 = don't have one &middot; 1&ndash;6 = somewhat recommend &middot; 8&ndash;10 = highly recommend</p>
+    <input type="number" id="cpa" placeholder="0 &ndash; 10" min="0" max="10" />
+    <div class="error-msg" id="err-3"></div>
+    <div class="nav-row">
+      <button class="btn btn-back" onclick="goBack()">&larr;</button>
+      <button class="btn" onclick="goNext()">Next</button>
+    </div>
+    <p class="enter-hint">Press <kbd>Enter &crarr;</kbd></p>
+  </div>
+
+  <!-- Slide 4: Family Will -->
+  <div class="slide" id="slide-4">
+    <p class="q-number">Question 4 of 5</p>
+    <p class="q-text">Rate your Family Will / Estate Attorney</p>
+    <p class="q-hint">0 = don't have one &middot; 1&ndash;6 = somewhat recommend &middot; 8&ndash;10 = highly recommend</p>
+    <input type="number" id="family_will" placeholder="0 &ndash; 10" min="0" max="10" />
+    <div class="error-msg" id="err-4"></div>
+    <div class="nav-row">
+      <button class="btn btn-back" onclick="goBack()">&larr;</button>
+      <button class="btn" onclick="goNext()">Next</button>
+    </div>
+    <p class="enter-hint">Press <kbd>Enter &crarr;</kbd></p>
+  </div>
+
+  <!-- Slide 5: Insurance Agent -->
+  <div class="slide" id="slide-5">
+    <p class="q-number">Question 5 of 5</p>
+    <p class="q-text">Rate your Insurance Agent</p>
+    <p class="q-hint">0 = don't have one &middot; 1&ndash;6 = somewhat recommend &middot; 8&ndash;10 = highly recommend</p>
+    <input type="number" id="insurance" placeholder="0 &ndash; 10" min="0" max="10" />
+    <div class="error-msg" id="err-5"></div>
+    <div class="nav-row">
+      <button class="btn btn-back" onclick="goBack()">&larr;</button>
+      <button class="btn btn-primary" onclick="goNext()">Submit</button>
+    </div>
+    <p class="enter-hint">Press <kbd>Enter &crarr;</kbd></p>
+  </div>
+
+  <!-- Slide 6: Thank you -->
+  <div class="slide thank-you" id="slide-6">
+    <img src="logo.jpeg" alt="Jubilee Lending" class="logo"
+         onerror="this.src='https://storage.tally.so/60df52f1-9c09-4331-9f82-3aa5a5ddeacd/WhatsApp-Image-2026-05-27-at-1.28.20-PM.jpeg'" />
+    <h1 class="welcome-title">Thank you. &check;</h1>
+    <p class="welcome-sub">
+      Your responses have been recorded.<br>
+      You can close this page.
+    </p>
+  </div>
+
+</div>
+
+<script>
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxzwE8_Sk33V8XgnPQlCN7QUF2kxugojnVGdtbDKq3yxZi1r4pGm5HbslJyizqxhiuqw/exec";
+
+  let current = 0;
+  const totalQuestions = 5;
+
+  function validate(slideIndex) {
+    const errEl = document.getElementById("err-" + slideIndex);
+    if (errEl) errEl.textContent = "";
+
+    if (slideIndex === 1) {
+      const val = document.getElementById("name").value.trim();
+      if (!val) { errEl.textContent = "Please enter your name."; return false; }
+    }
+    if (slideIndex >= 2 && slideIndex <= 5) {
+      const fields = [null, null, "financial_advisor", "cpa", "family_will", "insurance"];
+      const val = document.getElementById(fields[slideIndex]).value;
+      if (val === "" || isNaN(val) || parseInt(val) < 0 || parseInt(val) > 10) {
+        errEl.textContent = "Enter a number between 0 and 10.";
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function goNext() {
+    if (!validate(current)) return;
+    if (current === 5) submitForm();
+
+    const oldSlide = document.getElementById("slide-" + current);
+    oldSlide.classList.add("exit-up");
+
+    setTimeout(() => {
+      oldSlide.classList.remove("active", "exit-up");
+      current++;
+      const newSlide = document.getElementById("slide-" + current);
+      newSlide.classList.add("active");
+      const input = newSlide.querySelector("input");
+      if (input) setTimeout(() => input.focus(), 100);
+      updateProgress();
+    }, 300);
+  }
+
+  function goBack() {
+    const oldSlide = document.getElementById("slide-" + current);
+    oldSlide.classList.remove("active");
+    current--;
+    const newSlide = document.getElementById("slide-" + current);
+    newSlide.classList.add("active");
+    const input = newSlide.querySelector("input");
+    if (input) setTimeout(() => input.focus(), 100);
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const pct = current === 0 ? 0 : Math.min((current / totalQuestions) * 100, 100);
+    document.getElementById("progress").style.width = pct + "%";
+  }
+
+  function submitForm() {
+    const data = {
+      name: document.getElementById("name").value.trim(),
+      financial_advisor: parseInt(document.getElementById("financial_advisor").value),
+      cpa: parseInt(document.getElementById("cpa").value),
+      family_will: parseInt(document.getElementById("family_will").value),
+      insurance: parseInt(document.getElementById("insurance").value)
+    };
+
+    if (GOOGLE_SCRIPT_URL) {
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    } else {
+      console.log("Form data (no endpoint configured):", data);
+    }
+  }
+
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Enter" && current >= 1 && current <= 5) goNext();
+  });
+</script>
+
+</body>
+</html>
