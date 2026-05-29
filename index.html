@@ -253,8 +253,12 @@
     <h1 class="welcome-title">Welcome to<br>Jubilee Lending.</h1>
     <p class="welcome-sub">
       Thank you for taking 2 minutes of your time to fill out this quick form.<br><br>
-      You will be asked to rate each of the following professionals on a scale of 1 to 10.<br>
-      Put 0 if you do not have one. All fields are required.
+      You will be asked to rate each professional you work with on a scale of 0 to 10.<br><br>
+      0 = currently not working with any<br>
+      1&ndash;5 = would not recommend their services<br>
+      6&ndash;7 = would somewhat recommend their services, but not fully impressed<br>
+      8&ndash;10 = highly recommend their services<br><br>
+      All fields are required.
     </p>
     <button class="btn btn-primary" onclick="goNext()">Get started &rarr;</button>
   </div>
@@ -277,7 +281,7 @@
   <div class="slide" id="slide-2">
     <p class="q-number">Question 2 of 5</p>
     <p class="q-text">Rate your Financial Advisor</p>
-    <p class="q-hint">0 = don't have one &middot; 1&ndash;6 = somewhat recommend &middot; 8&ndash;10 = highly recommend</p>
+    <p class="q-hint">0 = not working with any &middot; 1&ndash;5 = won't recommend &middot; 6&ndash;7 = somewhat recommend, not fully impressed &middot; 8&ndash;10 = highly recommend</p>
     <input type="number" id="financial_advisor" placeholder="0 &ndash; 10" min="0" max="10" />
     <div class="error-msg" id="err-2"></div>
     <div class="nav-row">
@@ -291,7 +295,7 @@
   <div class="slide" id="slide-3">
     <p class="q-number">Question 3 of 5</p>
     <p class="q-text">Rate your CPA / Tax Strategist</p>
-    <p class="q-hint">0 = don't have one &middot; 1&ndash;6 = somewhat recommend &middot; 8&ndash;10 = highly recommend</p>
+    <p class="q-hint">0 = not working with any &middot; 1&ndash;5 = won't recommend &middot; 6&ndash;7 = somewhat recommend, not fully impressed &middot; 8&ndash;10 = highly recommend</p>
     <input type="number" id="cpa" placeholder="0 &ndash; 10" min="0" max="10" />
     <div class="error-msg" id="err-3"></div>
     <div class="nav-row">
@@ -305,7 +309,7 @@
   <div class="slide" id="slide-4">
     <p class="q-number">Question 4 of 5</p>
     <p class="q-text">Rate your Family Will / Estate Attorney</p>
-    <p class="q-hint">0 = don't have one &middot; 1&ndash;6 = somewhat recommend &middot; 8&ndash;10 = highly recommend</p>
+    <p class="q-hint">0 = not working with any &middot; 1&ndash;5 = won't recommend &middot; 6&ndash;7 = somewhat recommend, not fully impressed &middot; 8&ndash;10 = highly recommend</p>
     <input type="number" id="family_will" placeholder="0 &ndash; 10" min="0" max="10" />
     <div class="error-msg" id="err-4"></div>
     <div class="nav-row">
@@ -319,7 +323,7 @@
   <div class="slide" id="slide-5">
     <p class="q-number">Question 5 of 5</p>
     <p class="q-text">Rate your Insurance Agent</p>
-    <p class="q-hint">0 = don't have one &middot; 1&ndash;6 = somewhat recommend &middot; 8&ndash;10 = highly recommend</p>
+    <p class="q-hint">0 = not working with any &middot; 1&ndash;5 = won't recommend &middot; 6&ndash;7 = somewhat recommend, not fully impressed &middot; 8&ndash;10 = highly recommend</p>
     <input type="number" id="insurance" placeholder="0 &ndash; 10" min="0" max="10" />
     <div class="error-msg" id="err-5"></div>
     <div class="nav-row">
