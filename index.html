@@ -32,7 +32,7 @@
       width: 100%;
       height: 100%;
       background: url("https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1920&q=80&auto=format") center/cover no-repeat;
-      opacity: 0.08;
+      opacity: 0.02;
       z-index: 0;
       pointer-events: none;
     }
@@ -132,7 +132,7 @@
     .welcome-sub {
       font-size: clamp(0.95rem, 2.3vw, 1.12rem);
       font-weight: 400;
-      color: #514C47;
+      color: #342F2A;
       line-height: 1.48;
       margin-bottom: clamp(1rem, 2.6vw, 1.8rem);
       max-width: 760px;
@@ -182,10 +182,17 @@
     }
 
     .q-hint {
-      font-size: clamp(0.76rem, 2.4vw, 0.85rem);
-      color: #5E5852;
+      font-size: clamp(0.76rem, 2.4vw, 0.88rem);
+      color: #211E1A;
+      font-weight: 600;
       line-height: 1.35;
-      margin-bottom: clamp(1rem, 3vw, 2rem);
+      margin-bottom: clamp(0.85rem, 2.5vw, 1.5rem);
+      padding: clamp(0.55rem, 1.8vw, 0.75rem) clamp(0.65rem, 2vw, 0.9rem);
+      background: rgba(250,249,246,0.82);
+      border: 1px solid rgba(45,42,38,0.10);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(45,42,38,0.045);
+      text-shadow: none;
     }
 
     input[type="text"],
@@ -308,7 +315,7 @@
   
 
     @media (max-width: 700px) {
-      .bg-house { opacity: 0.06; }
+      .bg-house { opacity: 0.018; }
       .form-container { padding: 1rem; }
       .slide { max-width: 100%; max-height: calc(100dvh - 2rem); }
       .welcome-title {
@@ -334,7 +341,7 @@
       .scale-item { font-size: 0.74rem; padding: 0.36rem 0.5rem; }
       .tap-hint { font-size: 0.74rem; margin-top: 0.5rem; }
       .q-text { font-size: 1.25rem; }
-      .q-hint { font-size: 0.72rem; margin-bottom: 0.8rem; }
+      .q-hint { font-size: 0.7rem; line-height: 1.22; margin-bottom: 0.65rem; padding: 0.4rem 0.5rem; border-radius: 10px; }
       .nav-row { margin-top: 0.8rem; }
       .btn { padding: 0.65rem 1.1rem; }
     }
@@ -353,7 +360,7 @@
       .btn { margin-top: 0.75rem; padding: 0.62rem 1.25rem; }
       .q-number { margin-bottom: 0.4rem; }
       .q-text { font-size: clamp(1.18rem, 4.5vw, 1.5rem); line-height: 1.12; }
-      .q-hint { font-size: 0.72rem; line-height: 1.25; margin-bottom: 0.7rem; }
+      .q-hint { font-size: 0.7rem; line-height: 1.2; margin-bottom: 0.55rem; padding: 0.38rem 0.5rem; border-radius: 10px; }
       input[type="text"], input[type="number"] { padding: 0.5rem 0; }
       .nav-row { margin-top: 0.65rem; }
       .enter-hint { margin-top: 0.55rem; }
@@ -371,7 +378,7 @@
       #slide-0 .btn { margin-top: 0.45rem; padding: 0.5rem 1rem; min-height: 36px; }
       .slide { max-height: calc(100dvh - 1.1rem); }
       .q-text { font-size: 1.18rem; }
-      .q-hint { font-size: 0.68rem; margin-bottom: 0.5rem; }
+      .q-hint { font-size: 0.64rem; line-height: 1.15; margin-bottom: 0.4rem; padding: 0.32rem 0.45rem; border-radius: 9px; }
       .nav-row { margin-top: 0.55rem; }
       .btn { padding: 0.5rem 1rem; min-height: 36px; }
       .enter-hint { display: none; }
