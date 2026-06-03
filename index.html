@@ -82,19 +82,24 @@
     }
 
     .welcome-title {
-      font-size: 3.2rem;
+      font-size: clamp(2.25rem, 5vw, 3.35rem);
       font-weight: 700;
       letter-spacing: -0.04em;
-      line-height: 1.1;
+      line-height: 1.08;
       margin-bottom: 1rem;
       color: #2D2A26;
+      white-space: nowrap;
+    }
+
+    #slide-0 {
+      max-width: 1100px;
     }
 
     .welcome-sub {
-      font-size: 1.1rem;
-      font-weight: 300;
-      color: rgba(45,42,38,0.55);
-      line-height: 1.6;
+      font-size: 1.12rem;
+      font-weight: 400;
+      color: #514C47;
+      line-height: 1.65;
       margin-bottom: 2.5rem;
     }
 
@@ -118,7 +123,7 @@
 
     .q-hint {
       font-size: 0.85rem;
-      color: rgba(45,42,38,0.4);
+      color: #5E5852;
       margin-bottom: 2rem;
     }
 
@@ -228,10 +233,16 @@
     }
 
     .error-msg {
-      color: #c44;
+      color: #9A6A38;
       font-size: 0.8rem;
+      font-weight: 500;
       margin-top: 0.5rem;
       min-height: 1.2rem;
+      transition: opacity 0.2s ease;
+    }
+
+    input.input-soft-error {
+      border-bottom-color: rgba(154,106,56,0.45);
     }
   </style>
 </head>
@@ -250,7 +261,7 @@
            onerror="this.src='https://storage.tally.so/60df52f1-9c09-4331-9f82-3aa5a5ddeacd/WhatsApp-Image-2026-05-27-at-1.28.20-PM.jpeg'" />
       <img src="mom.jpeg" alt="" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(45,42,38,0.08);" />
     </div>
-    <h1 class="welcome-title">Welcome to<br>Jubilee Lending.</h1>
+    <h1 class="welcome-title">Welcome to Jubilee Lending LLC.</h1>
     <p class="welcome-sub">
       Thank you for taking 2 minutes of your time to fill out this quick form.<br><br>
       You will be asked to rate each professional you work with on a scale of 0 to 10.<br><br>
@@ -282,7 +293,7 @@
     <p class="q-number">Question 2 of 5</p>
     <p class="q-text">Rate your Financial Advisor</p>
     <p class="q-hint">0 = not working with any &middot; 1&ndash;5 = won't recommend &middot; 6&ndash;7 = somewhat recommend, not fully impressed &middot; 8&ndash;10 = highly recommend</p>
-    <input type="number" id="financial_advisor" placeholder="0 &ndash; 10" min="0" max="10" />
+    <input type="number" id="financial_advisor" placeholder="0 &ndash; 10" min="0" max="10" inputmode="numeric" pattern="[0-9]*" />
     <div class="error-msg" id="err-2"></div>
     <div class="nav-row">
       <button class="btn btn-back" onclick="goBack()">&larr;</button>
@@ -296,7 +307,7 @@
     <p class="q-number">Question 3 of 5</p>
     <p class="q-text">Rate your CPA / Tax Strategist</p>
     <p class="q-hint">0 = not working with any &middot; 1&ndash;5 = won't recommend &middot; 6&ndash;7 = somewhat recommend, not fully impressed &middot; 8&ndash;10 = highly recommend</p>
-    <input type="number" id="cpa" placeholder="0 &ndash; 10" min="0" max="10" />
+    <input type="number" id="cpa" placeholder="0 &ndash; 10" min="0" max="10" inputmode="numeric" pattern="[0-9]*" />
     <div class="error-msg" id="err-3"></div>
     <div class="nav-row">
       <button class="btn btn-back" onclick="goBack()">&larr;</button>
@@ -310,7 +321,7 @@
     <p class="q-number">Question 4 of 5</p>
     <p class="q-text">Rate your Family Will / Estate Attorney</p>
     <p class="q-hint">0 = not working with any &middot; 1&ndash;5 = won't recommend &middot; 6&ndash;7 = somewhat recommend, not fully impressed &middot; 8&ndash;10 = highly recommend</p>
-    <input type="number" id="family_will" placeholder="0 &ndash; 10" min="0" max="10" />
+    <input type="number" id="family_will" placeholder="0 &ndash; 10" min="0" max="10" inputmode="numeric" pattern="[0-9]*" />
     <div class="error-msg" id="err-4"></div>
     <div class="nav-row">
       <button class="btn btn-back" onclick="goBack()">&larr;</button>
@@ -324,7 +335,7 @@
     <p class="q-number">Question 5 of 5</p>
     <p class="q-text">Rate your Insurance Agent</p>
     <p class="q-hint">0 = not working with any &middot; 1&ndash;5 = won't recommend &middot; 6&ndash;7 = somewhat recommend, not fully impressed &middot; 8&ndash;10 = highly recommend</p>
-    <input type="number" id="insurance" placeholder="0 &ndash; 10" min="0" max="10" />
+    <input type="number" id="insurance" placeholder="0 &ndash; 10" min="0" max="10" inputmode="numeric" pattern="[0-9]*" />
     <div class="error-msg" id="err-5"></div>
     <div class="nav-row">
       <button class="btn btn-back" onclick="goBack()">&larr;</button>
@@ -362,11 +373,15 @@
     }
     if (slideIndex >= 2 && slideIndex <= 5) {
       const fields = [null, null, "financial_advisor", "cpa", "family_will", "insurance"];
-      const val = document.getElementById(fields[slideIndex]).value;
-      if (val === "" || isNaN(val) || parseInt(val) < 0 || parseInt(val) > 10) {
-        errEl.textContent = "Enter a number between 0 and 10.";
+      const input = document.getElementById(fields[slideIndex]);
+      const val = input.value;
+      const num = Number(val);
+      if (val === "" || !Number.isInteger(num) || num < 0 || num > 10) {
+        errEl.textContent = "Please enter a number from 0 to 10.";
+        input.classList.add("input-soft-error");
         return false;
       }
+      input.classList.remove("input-soft-error");
     }
     return true;
   }
@@ -425,6 +440,31 @@
       console.log("Form data (no endpoint configured):", data);
     }
   }
+
+  function sanitizeRatingInput(input) {
+    const original = input.value;
+    input.value = original.replace(/[^0-9]/g, "");
+
+    const slide = input.closest(".slide");
+    const errEl = slide ? slide.querySelector(".error-msg") : null;
+    const num = input.value === "" ? null : Number(input.value);
+
+    if (num !== null && num > 10) {
+      input.classList.add("input-soft-error");
+      if (errEl) errEl.textContent = "Please choose a number from 0 to 10.";
+    } else {
+      input.classList.remove("input-soft-error");
+      if (errEl) errEl.textContent = "";
+    }
+  }
+
+  document.querySelectorAll('input[type="number"]').forEach((input) => {
+    input.addEventListener("beforeinput", (e) => {
+      if (e.data && /[^0-9]/.test(e.data)) e.preventDefault();
+    });
+    input.addEventListener("input", () => sanitizeRatingInput(input));
+    input.addEventListener("paste", () => setTimeout(() => sanitizeRatingInput(input), 0));
+  });
 
   document.addEventListener("keydown", function(e) {
     if (e.key === "Enter" && current >= 1 && current <= 5) goNext();
