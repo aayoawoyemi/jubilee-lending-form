@@ -191,11 +191,11 @@
 
     .q-hint {
       display: grid;
-      gap: 0.28rem;
-      font-size: clamp(0.74rem, 2.2vw, 0.84rem);
+      gap: 0.3rem;
+      font-size: clamp(0.82rem, 2.35vw, 0.92rem);
       color: #211E1A;
-      font-weight: 600;
-      line-height: 1.22;
+      font-weight: 650;
+      line-height: 1.26;
       margin-bottom: clamp(0.75rem, 2.2vw, 1.25rem);
       padding: clamp(0.55rem, 1.8vw, 0.75rem) clamp(0.65rem, 2vw, 0.9rem);
       background: rgba(250,249,246,0.86);
@@ -354,8 +354,8 @@
       .welcome-sub { font-size: 0.88rem; line-height: 1.33; margin-bottom: 0.8rem; }
       .scale-item { font-size: 0.74rem; padding: 0.36rem 0.5rem; }
       .tap-hint { font-size: 0.74rem; margin-top: 0.5rem; }
-      .q-text { font-size: 1.25rem; }
-      .q-hint { gap: 0.16rem; font-size: 0.66rem; line-height: 1.12; margin-bottom: 0.5rem; padding: 0.34rem 0.45rem; border-radius: 10px; }
+      .q-text { font-size: 1.32rem; }
+      .q-hint { gap: 0.16rem; font-size: 0.76rem; line-height: 1.13; margin-bottom: 0.5rem; padding: 0.34rem 0.45rem; border-radius: 10px; }
       .nav-row { margin-top: 0.8rem; }
       .btn { padding: 0.65rem 1.1rem; }
     }
@@ -373,8 +373,8 @@
       .tap-hint { margin-top: 0.4rem; font-size: 0.72rem; }
       .btn { margin-top: 0.75rem; padding: 0.62rem 1.25rem; }
       .q-number { margin-bottom: 0.32rem; padding: 0.18rem 0.38rem; }
-      .q-text { font-size: clamp(1.18rem, 4.5vw, 1.5rem); line-height: 1.12; }
-      .q-hint { gap: 0.14rem; font-size: 0.64rem; line-height: 1.1; margin-bottom: 0.45rem; padding: 0.3rem 0.42rem; border-radius: 10px; }
+      .q-text { font-size: clamp(1.24rem, 4.8vw, 1.55rem); line-height: 1.12; }
+      .q-hint { gap: 0.14rem; font-size: 0.74rem; line-height: 1.1; margin-bottom: 0.45rem; padding: 0.3rem 0.42rem; border-radius: 10px; }
       input[type="text"], input[type="number"] { padding: 0.5rem 0; }
       .nav-row { margin-top: 0.65rem; }
       .enter-hint { margin-top: 0.55rem; }
@@ -392,7 +392,7 @@
       #slide-0 .btn { margin-top: 0.45rem; padding: 0.5rem 1rem; min-height: 36px; }
       .slide { max-height: calc(100dvh - 1.1rem); }
       .q-text { font-size: 1.18rem; }
-      .q-hint { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.12rem 0.35rem; font-size: 0.58rem; line-height: 1.05; margin-bottom: 0.28rem; padding: 0.25rem 0.35rem; border-radius: 9px; }
+      .q-hint { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.14rem 0.42rem; font-size: 0.68rem; line-height: 1.08; margin-bottom: 0.3rem; padding: 0.28rem 0.38rem; border-radius: 9px; }
       .nav-row { margin-top: 0.55rem; }
       .btn { padding: 0.5rem 1rem; min-height: 36px; }
       .enter-hint { display: none; }
@@ -448,7 +448,7 @@
   <div class="slide" id="slide-2">
     <p class="q-number">Question 2 of 5</p>
     <p class="q-text">Rate your Financial Advisor</p>
-    <p class="q-hint"><span class="hint-line">0 = not working with any</span><span class="hint-line">1&ndash;5 = won't recommend</span><span class="hint-line">6&ndash;7 = somewhat recommend, not fully impressed</span><span class="hint-line">8&ndash;10 = highly recommend</span></p>
+    <p class="q-hint"><span class="hint-line">0 = not working with one</span><span class="hint-line">1&ndash;5 = would not recommend</span><span class="hint-line">6&ndash;7 = somewhat recommend</span><span class="hint-line">8&ndash;10 = highly recommend</span></p>
     <input type="number" id="financial_advisor" placeholder="0 &ndash; 10" min="0" max="10" inputmode="numeric" pattern="[0-9]*" />
     <div class="error-msg" id="err-2"></div>
     <div class="nav-row">
@@ -462,7 +462,7 @@
   <div class="slide" id="slide-3">
     <p class="q-number">Question 3 of 5</p>
     <p class="q-text">Rate your CPA / Tax Strategist</p>
-    <p class="q-hint"><span class="hint-line">0 = not working with any</span><span class="hint-line">1&ndash;5 = won't recommend</span><span class="hint-line">6&ndash;7 = somewhat recommend, not fully impressed</span><span class="hint-line">8&ndash;10 = highly recommend</span></p>
+    <p class="q-hint"><span class="hint-line">0 = not working with one</span><span class="hint-line">1&ndash;5 = would not recommend</span><span class="hint-line">6&ndash;7 = somewhat recommend</span><span class="hint-line">8&ndash;10 = highly recommend</span></p>
     <input type="number" id="cpa" placeholder="0 &ndash; 10" min="0" max="10" inputmode="numeric" pattern="[0-9]*" />
     <div class="error-msg" id="err-3"></div>
     <div class="nav-row">
@@ -476,7 +476,7 @@
   <div class="slide" id="slide-4">
     <p class="q-number">Question 4 of 5</p>
     <p class="q-text">Rate your Family Will / Estate Attorney</p>
-    <p class="q-hint"><span class="hint-line">0 = not working with any</span><span class="hint-line">1&ndash;5 = won't recommend</span><span class="hint-line">6&ndash;7 = somewhat recommend, not fully impressed</span><span class="hint-line">8&ndash;10 = highly recommend</span></p>
+    <p class="q-hint"><span class="hint-line">0 = not working with one</span><span class="hint-line">1&ndash;5 = would not recommend</span><span class="hint-line">6&ndash;7 = somewhat recommend</span><span class="hint-line">8&ndash;10 = highly recommend</span></p>
     <input type="number" id="family_will" placeholder="0 &ndash; 10" min="0" max="10" inputmode="numeric" pattern="[0-9]*" />
     <div class="error-msg" id="err-4"></div>
     <div class="nav-row">
@@ -490,7 +490,7 @@
   <div class="slide" id="slide-5">
     <p class="q-number">Question 5 of 5</p>
     <p class="q-text">Rate your Insurance Agent</p>
-    <p class="q-hint"><span class="hint-line">0 = not working with any</span><span class="hint-line">1&ndash;5 = won't recommend</span><span class="hint-line">6&ndash;7 = somewhat recommend, not fully impressed</span><span class="hint-line">8&ndash;10 = highly recommend</span></p>
+    <p class="q-hint"><span class="hint-line">0 = not working with one</span><span class="hint-line">1&ndash;5 = would not recommend</span><span class="hint-line">6&ndash;7 = somewhat recommend</span><span class="hint-line">8&ndash;10 = highly recommend</span></p>
     <input type="number" id="insurance" placeholder="0 &ndash; 10" min="0" max="10" inputmode="numeric" pattern="[0-9]*" />
     <div class="error-msg" id="err-5"></div>
     <div class="nav-row">
