@@ -9,12 +9,20 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background: #FAF9F6;
       color: #2D2A26;
       min-height: 100vh;
-      overflow: hidden;
+      min-height: 100dvh;
     }
 
     .bg-house {
@@ -35,18 +43,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      padding: 2rem;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      padding: clamp(0.85rem, 3vw, 2rem);
       position: relative;
       z-index: 1;
+      overflow: hidden;
     }
 
     .slide {
       display: none;
       flex-direction: column;
       align-items: flex-start;
+      justify-content: center;
       max-width: 640px;
       width: 100%;
+      max-height: calc(100dvh - clamp(1.7rem, 6vw, 4rem));
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.5s ease, transform 0.5s ease;
@@ -71,6 +84,26 @@
       border-radius: 12px;
     }
 
+    .welcome-media {
+      display: flex;
+      align-items: center;
+      gap: clamp(0.75rem, 2.5vw, 1.5rem);
+      margin-bottom: clamp(0.85rem, 2.6vw, 2rem);
+    }
+
+    .welcome-media .logo {
+      width: clamp(82px, 18vw, 140px);
+      margin-bottom: 0;
+    }
+
+    .portrait {
+      width: clamp(56px, 13vw, 90px);
+      height: clamp(56px, 13vw, 90px);
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(45,42,38,0.08);
+    }
+
     /* Welcome screen */
     .welcome-label {
       font-size: 0.75rem;
@@ -82,49 +115,77 @@
     }
 
     .welcome-title {
-      font-size: clamp(2.25rem, 5vw, 3.35rem);
+      font-size: clamp(1.95rem, 5vw, 3.35rem);
       font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1.08;
-      margin-bottom: 1rem;
+      letter-spacing: -0.045em;
+      line-height: 1.04;
+      margin-bottom: clamp(0.65rem, 2vw, 1rem);
       color: #2D2A26;
       white-space: nowrap;
     }
 
     #slide-0 {
       max-width: 1100px;
+      cursor: pointer;
     }
 
     .welcome-sub {
-      font-size: 1.12rem;
+      font-size: clamp(0.95rem, 2.3vw, 1.12rem);
       font-weight: 400;
       color: #514C47;
-      line-height: 1.65;
-      margin-bottom: 2.5rem;
+      line-height: 1.48;
+      margin-bottom: clamp(1rem, 2.6vw, 1.8rem);
+      max-width: 760px;
+    }
+
+    .scale-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.45rem 0.85rem;
+      margin: clamp(0.65rem, 2vw, 1rem) 0;
+      max-width: 760px;
+    }
+
+    .scale-item {
+      background: rgba(45,42,38,0.045);
+      border: 1px solid rgba(45,42,38,0.08);
+      border-radius: 14px;
+      color: #47423D;
+      font-size: clamp(0.78rem, 1.9vw, 0.95rem);
+      line-height: 1.28;
+      padding: 0.55rem 0.7rem;
+    }
+
+    .tap-hint {
+      color: rgba(45,42,38,0.5);
+      font-size: 0.82rem;
+      margin-top: 0.75rem;
+      letter-spacing: 0.02em;
     }
 
     /* Question styling */
     .q-number {
-      font-size: 0.7rem;
+      font-size: clamp(0.62rem, 1.8vw, 0.7rem);
       font-weight: 600;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(45,42,38,0.3);
-      margin-bottom: 1rem;
+      color: rgba(45,42,38,0.38);
+      margin-bottom: clamp(0.55rem, 2vw, 1rem);
     }
 
     .q-text {
-      font-size: 1.8rem;
+      font-size: clamp(1.38rem, 4.6vw, 1.8rem);
       font-weight: 600;
       letter-spacing: -0.03em;
-      line-height: 1.3;
-      margin-bottom: 0.5rem;
+      line-height: 1.2;
+      margin-bottom: 0.45rem;
     }
 
     .q-hint {
-      font-size: 0.85rem;
+      font-size: clamp(0.76rem, 2.4vw, 0.85rem);
       color: #5E5852;
-      margin-bottom: 2rem;
+      line-height: 1.35;
+      margin-bottom: clamp(1rem, 3vw, 2rem);
     }
 
     input[type="text"],
@@ -133,8 +194,8 @@
       background: transparent;
       border: none;
       border-bottom: 2px solid rgba(45,42,38,0.12);
-      padding: 1rem 0;
-      font-size: 1.4rem;
+      padding: clamp(0.65rem, 2vw, 1rem) 0;
+      font-size: clamp(1.15rem, 4.2vw, 1.4rem);
       font-family: 'Inter', sans-serif;
       font-weight: 300;
       color: #2D2A26;
@@ -158,8 +219,8 @@
     input[type="number"] { -moz-appearance: textfield; }
 
     .btn {
-      margin-top: 2.5rem;
-      padding: 1rem 2.8rem;
+      margin-top: clamp(1rem, 3vw, 2rem);
+      padding: clamp(0.72rem, 2.5vw, 1rem) clamp(1.45rem, 6vw, 2.8rem);
       background: rgba(45,42,38,0.06);
       border: 1px solid rgba(45,42,38,0.12);
       border-radius: 60px;
@@ -192,7 +253,7 @@
     .nav-row {
       display: flex;
       gap: 0.75rem;
-      margin-top: 2.5rem;
+      margin-top: clamp(1rem, 3.5vw, 2rem);
     }
 
     .btn-back {
@@ -244,6 +305,78 @@
     input.input-soft-error {
       border-bottom-color: rgba(154,106,56,0.45);
     }
+  
+
+    @media (max-width: 700px) {
+      .bg-house { opacity: 0.06; }
+      .form-container { padding: 1rem; }
+      .slide { max-width: 100%; max-height: calc(100dvh - 2rem); }
+      .welcome-title {
+        white-space: normal;
+        max-width: 100%;
+      }
+      .scale-list {
+        grid-template-columns: 1fr;
+        gap: 0.38rem;
+      }
+      .scale-item { padding: 0.45rem 0.6rem; }
+      .welcome-sub { line-height: 1.42; }
+      .btn { min-height: 44px; }
+      .enter-hint { margin-top: 0.8rem; }
+    }
+
+    @media (max-width: 380px) {
+      .form-container { padding: 0.8rem; }
+      .slide { max-height: calc(100dvh - 1.6rem); }
+      .welcome-media { margin-bottom: 0.55rem; }
+      .welcome-title { font-size: clamp(1.55rem, 10vw, 2.05rem); }
+      .welcome-sub { font-size: 0.88rem; line-height: 1.33; margin-bottom: 0.8rem; }
+      .scale-item { font-size: 0.74rem; padding: 0.36rem 0.5rem; }
+      .tap-hint { font-size: 0.74rem; margin-top: 0.5rem; }
+      .q-text { font-size: 1.25rem; }
+      .q-hint { font-size: 0.72rem; margin-bottom: 0.8rem; }
+      .nav-row { margin-top: 0.8rem; }
+      .btn { padding: 0.65rem 1.1rem; }
+    }
+
+    @media (max-height: 700px) {
+      .form-container { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+      .slide { max-height: calc(100dvh - 1.5rem); }
+      .welcome-media { margin-bottom: 0.55rem; }
+      .welcome-media .logo { width: 76px; }
+      .portrait { width: 52px; height: 52px; }
+      .welcome-title { font-size: clamp(1.45rem, 7vw, 2.35rem); margin-bottom: 0.45rem; }
+      .welcome-sub { font-size: 0.84rem; line-height: 1.28; margin-bottom: 0.75rem; }
+      .scale-list { gap: 0.32rem 0.5rem; margin: 0.5rem 0; }
+      .scale-item { font-size: 0.72rem; padding: 0.34rem 0.5rem; }
+      .tap-hint { margin-top: 0.4rem; font-size: 0.72rem; }
+      .btn { margin-top: 0.75rem; padding: 0.62rem 1.25rem; }
+      .q-number { margin-bottom: 0.4rem; }
+      .q-text { font-size: clamp(1.18rem, 4.5vw, 1.5rem); line-height: 1.12; }
+      .q-hint { font-size: 0.72rem; line-height: 1.25; margin-bottom: 0.7rem; }
+      input[type="text"], input[type="number"] { padding: 0.5rem 0; }
+      .nav-row { margin-top: 0.65rem; }
+      .enter-hint { margin-top: 0.55rem; }
+    }
+
+    @media (orientation: landscape) and (max-height: 520px) {
+      .form-container { align-items: center; padding: 0.55rem 1rem; }
+      .welcome-media { display: none; }
+      #slide-0 { max-width: 900px; }
+      .welcome-title { font-size: clamp(1.35rem, 4vw, 1.9rem); white-space: nowrap; }
+      .welcome-sub { font-size: 0.78rem; line-height: 1.22; max-width: 900px; margin-bottom: 0.55rem; }
+      .scale-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.35rem; max-width: 900px; }
+      .scale-item { font-size: 0.66rem; padding: 0.32rem 0.42rem; }
+      .tap-hint { display: none; }
+      #slide-0 .btn { margin-top: 0.45rem; padding: 0.5rem 1rem; min-height: 36px; }
+      .slide { max-height: calc(100dvh - 1.1rem); }
+      .q-text { font-size: 1.18rem; }
+      .q-hint { font-size: 0.68rem; margin-bottom: 0.5rem; }
+      .nav-row { margin-top: 0.55rem; }
+      .btn { padding: 0.5rem 1rem; min-height: 36px; }
+      .enter-hint { display: none; }
+    }
+
   </style>
 </head>
 <body>
@@ -255,23 +388,25 @@
 <div class="form-container">
 
   <!-- Slide 0: Welcome -->
-  <div class="slide active" id="slide-0">
-    <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
-      <img src="logo.jpeg" alt="Jubilee Lending" class="logo" style="margin-bottom: 0;"
+  <div class="slide active" id="slide-0" onclick="startWelcome(event)">
+    <div class="welcome-media">
+      <img src="logo.jpeg" alt="Jubilee Lending" class="logo"
            onerror="this.src='https://storage.tally.so/60df52f1-9c09-4331-9f82-3aa5a5ddeacd/WhatsApp-Image-2026-05-27-at-1.28.20-PM.jpeg'" />
-      <img src="mom.jpeg" alt="" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(45,42,38,0.08);" />
+      <img src="mom.jpeg" alt="" class="portrait" />
     </div>
     <h1 class="welcome-title">Welcome to Jubilee Lending LLC.</h1>
-    <p class="welcome-sub">
-      Thank you for taking 2 minutes of your time to fill out this quick form.<br><br>
-      You will be asked to rate each professional you work with on a scale of 0 to 10.<br><br>
-      0 = currently not working with any<br>
-      1&ndash;5 = would not recommend their services<br>
-      6&ndash;7 = would somewhat recommend their services, but not fully impressed<br>
-      8&ndash;10 = highly recommend their services<br><br>
-      All fields are required.
-    </p>
-    <button class="btn btn-primary" onclick="goNext()">Get started &rarr;</button>
+    <div class="welcome-sub">
+      <p>This 2-minute form asks you to rate a few professionals you work with from 0&ndash;10.</p>
+      <div class="scale-list" aria-label="Rating scale">
+        <div class="scale-item"><strong>0</strong> = not working with one</div>
+        <div class="scale-item"><strong>1&ndash;5</strong> = would not recommend</div>
+        <div class="scale-item"><strong>6&ndash;7</strong> = somewhat recommend</div>
+        <div class="scale-item"><strong>8&ndash;10</strong> = highly recommend</div>
+      </div>
+      <p>All fields are required.</p>
+      <p class="tap-hint">Tap anywhere or press Enter to begin.</p>
+    </div>
+    <button class="btn btn-primary" onclick="event.stopPropagation(); goNext();">Get started &rarr;</button>
   </div>
 
   <!-- Slide 1: Name -->
@@ -386,6 +521,10 @@
     return true;
   }
 
+  function startWelcome(event) {
+    if (current === 0) goNext();
+  }
+
   function goNext() {
     if (!validate(current)) return;
     if (current === 5) submitForm();
@@ -467,7 +606,7 @@
   });
 
   document.addEventListener("keydown", function(e) {
-    if (e.key === "Enter" && current >= 1 && current <= 5) goNext();
+    if (e.key === "Enter" && current >= 0 && current <= 5) goNext();
   });
 </script>
 
